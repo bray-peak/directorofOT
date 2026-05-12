@@ -7,336 +7,129 @@
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
   :root {
-    --bg: #f5f4f0;
-    --surface: #ffffff;
-    --surface-2: #eeecea;
-    --border: rgba(0,0,0,0.1);
-    --border-strong: rgba(0,0,0,0.18);
-    --text: #1a1917;
-    --text-2: #6b6860;
-    --text-3: #9e9b94;
-    --green: #1a6b4a;
-    --green-light: #e6f4ed;
-    --green-mid: #2d9e6e;
-    --amber: #92580a;
-    --amber-light: #fdf3e3;
-    --red: #a33030;
-    --red-light: #fceaea;
+    --bg: #f5f4f0; --surface: #ffffff; --surface-2: #eeecea;
+    --border: rgba(0,0,0,0.1); --border-strong: rgba(0,0,0,0.18);
+    --text: #1a1917; --text-2: #6b6860; --text-3: #9e9b94;
+    --green: #1a6b4a; --green-light: #e6f4ed; --green-mid: #2d9e6e;
+    --red: #a33030; --red-light: #fceaea;
+    --amber: #92580a; --amber-light: #fdf3e3;
     --accent: #2a5caa;
-    --accent-light: #e8eef8;
   }
-
-  body {
-    font-family: 'DM Sans', sans-serif;
-    background: var(--bg);
-    color: var(--text);
-    min-height: 100vh;
-    padding: 0;
-  }
-
+  body { font-family: 'DM Sans', sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; }
+ 
   header {
-    background: var(--text);
-    color: #f5f4f0;
-    padding: 2.5rem 2rem 2rem;
-    position: relative;
-    overflow: hidden;
+    background: var(--text); color: #f5f4f0;
+    padding: 2.5rem 2rem 2rem; position: relative; overflow: hidden;
   }
   header::after {
-    content: 'OT';
-    position: absolute;
-    right: -0.5rem;
-    top: -1rem;
-    font-size: 9rem;
-    font-weight: 600;
-    color: rgba(255,255,255,0.04);
-    line-height: 1;
-    pointer-events: none;
-    letter-spacing: -4px;
+    content: 'OT'; position: absolute; right: -0.5rem; top: -1rem;
+    font-size: 9rem; font-weight: 600; color: rgba(255,255,255,0.04);
+    line-height: 1; pointer-events: none; letter-spacing: -4px;
   }
-  header .eyebrow {
-    font-size: 11px;
-    font-weight: 500;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: rgba(255,255,255,0.4);
-    margin-bottom: 8px;
-    font-family: 'DM Mono', monospace;
-  }
-  header h1 {
-    font-size: clamp(1.4rem, 3vw, 2rem);
-    font-weight: 500;
-    letter-spacing: -0.02em;
-    color: #f5f4f0;
-    line-height: 1.2;
-  }
-  header .subtitle {
-    margin-top: 6px;
-    font-size: 13px;
-    color: rgba(255,255,255,0.45);
-  }
-
-  .container {
-    max-width: 760px;
-    margin: 0 auto;
-    padding: 2rem 1.25rem 4rem;
-  }
-
-  .section-label {
-    font-size: 10.5px;
-    font-weight: 600;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: var(--text-3);
-    font-family: 'DM Mono', monospace;
-    margin-bottom: 12px;
-    margin-top: 2.5rem;
-  }
-
-  .card {
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: 12px;
-    padding: 1.25rem 1.5rem;
-    margin-bottom: 10px;
-  }
-
-  .card-title {
-    font-size: 13.5px;
-    font-weight: 500;
-    color: var(--text);
-    margin-bottom: 14px;
-    display: flex;
-    align-items: baseline;
-    gap: 8px;
-    flex-wrap: wrap;
-  }
-  .card-title .weight {
-    font-size: 11px;
-    font-family: 'DM Mono', monospace;
-    color: var(--text-3);
-    font-weight: 400;
-  }
-
-  .slider-row {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    margin-bottom: 12px;
-  }
-  .slider-row label {
-    font-size: 12px;
-    color: var(--text-2);
-    flex: 0 0 auto;
-    min-width: 130px;
-  }
-  .slider-row input[type=range] {
-    flex: 1;
-    -webkit-appearance: none;
-    height: 3px;
-    background: var(--border-strong);
-    border-radius: 2px;
-    outline: none;
-    cursor: pointer;
-  }
-  input[type=range]::-webkit-slider-thumb {
-    -webkit-appearance: none;
-    width: 16px;
-    height: 16px;
-    border-radius: 50%;
-    background: var(--text);
-    cursor: pointer;
-    border: 2px solid var(--bg);
-    box-shadow: 0 0 0 1px var(--border-strong);
-  }
-  input[type=range]::-moz-range-thumb {
-    width: 16px;
-    height: 16px;
-    border-radius: 50%;
-    background: var(--text);
-    cursor: pointer;
-    border: 2px solid var(--bg);
-  }
-  .pct-label {
-    font-size: 12px;
-    font-family: 'DM Mono', monospace;
-    color: var(--text-2);
-    min-width: 38px;
-    text-align: right;
-  }
-  .earn-label {
-    font-size: 13px;
-    font-weight: 500;
-    font-family: 'DM Mono', monospace;
-    color: var(--text);
-    min-width: 72px;
-    text-align: right;
-  }
-
-  .bar-track {
-    height: 4px;
-    background: var(--surface-2);
-    border-radius: 2px;
-    overflow: hidden;
-  }
-  .bar-fill {
-    height: 100%;
-    border-radius: 2px;
-    background: var(--green-mid);
-    transition: width 0.15s ease;
-  }
-
-  .team-section {
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: 12px;
-    padding: 1.25rem 1.5rem;
-    display: flex;
-    align-items: flex-start;
-    gap: 2rem;
-    flex-wrap: wrap;
-  }
-  .team-group { flex: 0 0 auto; }
-  .team-group .tg-label {
-    font-size: 11px;
-    color: var(--text-3);
-    margin-bottom: 8px;
-    font-family: 'DM Mono', monospace;
-  }
-  .team-group .tg-add {
-    font-size: 10px;
-    color: var(--accent);
-    margin-left: 4px;
-  }
-  .counter {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-  }
-  .counter button {
-    width: 30px;
-    height: 30px;
-    border-radius: 6px;
-    border: 1px solid var(--border-strong);
-    background: transparent;
-    cursor: pointer;
-    font-size: 16px;
-    color: var(--text);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: background 0.1s;
-    line-height: 1;
-  }
+  header .eyebrow { font-size: 11px; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(255,255,255,0.4); margin-bottom: 8px; font-family: 'DM Mono', monospace; }
+  header h1 { font-size: clamp(1.4rem, 3vw, 2rem); font-weight: 500; letter-spacing: -0.02em; color: #f5f4f0; line-height: 1.2; }
+  header .subtitle { margin-top: 6px; font-size: 13px; color: rgba(255,255,255,0.45); }
+ 
+  .container { max-width: 780px; margin: 0 auto; padding: 2rem 1.25rem 4rem; }
+ 
+  .section-label { font-size: 10.5px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-3); font-family: 'DM Mono', monospace; margin-bottom: 12px; margin-top: 2.5rem; }
+ 
+  .card { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 1.25rem 1.5rem; margin-bottom: 10px; }
+  .card-header { display: flex; align-items: baseline; justify-content: space-between; flex-wrap: wrap; gap: 8px; margin-bottom: 14px; }
+  .card-title { font-size: 13.5px; font-weight: 500; color: var(--text); }
+  .card-weight { font-size: 11px; font-family: 'DM Mono', monospace; color: var(--text-3); margin-top: 2px; }
+  .card-earn { font-size: 15px; font-weight: 600; font-family: 'DM Mono', monospace; color: var(--green); white-space: nowrap; }
+ 
+  /* Team */
+  .team-section { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 1.25rem 1.5rem; display: flex; align-items: flex-start; gap: 2rem; flex-wrap: wrap; }
+  .team-group .tg-label { font-size: 11px; color: var(--text-3); margin-bottom: 8px; font-family: 'DM Mono', monospace; }
+  .tg-add { color: var(--accent); margin-left: 4px; }
+  .counter { display: flex; align-items: center; gap: 10px; }
+  .counter button { width: 30px; height: 30px; border-radius: 6px; border: 1px solid var(--border-strong); background: transparent; cursor: pointer; font-size: 16px; color: var(--text); display: flex; align-items: center; justify-content: center; transition: background 0.1s; line-height: 1; }
   .counter button:hover { background: var(--surface-2); }
-  .counter .count {
-    font-size: 20px;
-    font-weight: 500;
-    font-family: 'DM Mono', monospace;
-    min-width: 24px;
-    text-align: center;
+  .counter .count { font-size: 20px; font-weight: 500; font-family: 'DM Mono', monospace; min-width: 24px; text-align: center; }
+  .pool-display { margin-left: auto; text-align: right; }
+  .pool-display .pool-label { font-size: 11px; color: var(--text-3); font-family: 'DM Mono', monospace; margin-bottom: 4px; }
+  .pool-display .pool-value { font-size: 24px; font-weight: 500; letter-spacing: -0.02em; color: var(--text); }
+  .pool-display .pool-detail { font-size: 11px; color: var(--text-3); margin-top: 2px; }
+ 
+  /* Director expectation badge */
+  .dir-expect { display: inline-flex; align-items: center; gap: 10px; background: var(--amber-light); border: 1px solid rgba(146,88,10,0.2); border-radius: 8px; padding: 10px 16px; margin-bottom: 14px; flex-wrap: wrap; }
+  .dir-expect .de-label { font-size: 12px; color: var(--amber); }
+  .dir-expect .de-val { font-size: 18px; font-weight: 600; font-family: 'DM Mono', monospace; color: var(--amber); }
+  .dir-expect .de-sub { font-size: 11px; color: #b07020; }
+ 
+  /* Sliders */
+  .slider-row { display: flex; align-items: center; gap: 12px; }
+  .slider-row label { font-size: 12px; color: var(--text-2); flex: 0 0 auto; min-width: 120px; }
+  .slider-row input[type=range] { flex: 1; -webkit-appearance: none; height: 3px; background: var(--border-strong); border-radius: 2px; outline: none; cursor: pointer; }
+  input[type=range]::-webkit-slider-thumb { -webkit-appearance: none; width: 16px; height: 16px; border-radius: 50%; background: var(--text); cursor: pointer; border: 2px solid var(--bg); box-shadow: 0 0 0 1px var(--border-strong); }
+  input[type=range]::-moz-range-thumb { width: 16px; height: 16px; border-radius: 50%; background: var(--text); cursor: pointer; border: 2px solid var(--bg); }
+  .pct-label { font-size: 12px; font-family: 'DM Mono', monospace; color: var(--text-2); min-width: 38px; text-align: right; }
+ 
+  /* Per-staff slider rows */
+  .staff-list { display: flex; flex-direction: column; gap: 10px; }
+  .staff-slider-row {
+    background: var(--surface-2); border: 1px solid var(--border);
+    border-radius: 10px; padding: 12px 14px;
+    transition: background 0.15s, border-color 0.15s;
   }
-
-  .pool-display {
-    margin-left: auto;
-    text-align: right;
-  }
-  .pool-display .pool-label {
-    font-size: 11px;
-    color: var(--text-3);
-    font-family: 'DM Mono', monospace;
-    margin-bottom: 4px;
-  }
-  .pool-display .pool-value {
-    font-size: 24px;
-    font-weight: 500;
-    letter-spacing: -0.02em;
-    color: var(--text);
-  }
-  .pool-display .pool-detail {
-    font-size: 11px;
-    color: var(--text-3);
-    margin-top: 2px;
-  }
-
-  .divider {
-    border: none;
-    border-top: 1px solid var(--border);
-    margin: 2rem 0;
-  }
-
-  .ramp-banner {
-    background: var(--green-light);
-    border: 1px solid rgba(29,158,117,0.25);
-    border-radius: 10px;
-    padding: 1rem 1.25rem;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 1rem;
-  }
-  .ramp-banner .rb-label {
-    font-size: 13px;
-    font-weight: 500;
-    color: var(--green);
-  }
-  .ramp-banner .rb-sub {
-    font-size: 11px;
-    color: #3d8f6a;
-    margin-top: 2px;
-  }
-  .ramp-banner .rb-value {
-    font-size: 22px;
-    font-weight: 600;
-    font-family: 'DM Mono', monospace;
-    color: var(--green);
-  }
-
-  .totals-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-    gap: 10px;
-  }
-  .total-card {
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: 10px;
-    padding: 1rem 1.25rem;
-  }
-  .total-card.highlight {
-    background: var(--text);
-    border-color: var(--text);
-  }
-  .total-card .tc-label {
-    font-size: 11px;
-    font-family: 'DM Mono', monospace;
-    color: var(--text-3);
-    margin-bottom: 6px;
-  }
+  .staff-slider-row.high { background: var(--green-light); border-color: rgba(29,158,117,0.3); }
+  .staff-slider-row.mid { background: var(--amber-light); border-color: rgba(146,88,10,0.2); }
+  .staff-slider-row.low { background: var(--red-light); border-color: rgba(163,48,48,0.2); }
+  .staff-slider-top { display: flex; align-items: center; justify-content: space-between; margin-bottom: 10px; gap: 8px; flex-wrap: wrap; }
+  .staff-slider-name { font-size: 13px; font-weight: 600; color: var(--text); }
+  .staff-base-badge { font-size: 10px; font-family: 'DM Mono', monospace; background: rgba(0,0,0,0.07); border-radius: 4px; padding: 2px 7px; color: var(--text-3); margin-left: 6px; }
+  .staff-slider-meta { font-size: 11px; font-family: 'DM Mono', monospace; color: var(--text-3); }
+  .staff-slider-earn { font-size: 13px; font-weight: 700; font-family: 'DM Mono', monospace; }
+  .staff-slider-row.high .staff-slider-earn { color: var(--green); }
+  .staff-slider-row.mid .staff-slider-earn { color: var(--amber); }
+  .staff-slider-row.low .staff-slider-earn { color: var(--red); }
+  .staff-slider-inner { display: flex; align-items: center; gap: 10px; }
+  .staff-slider-inner input[type=range] { flex: 1; -webkit-appearance: none; height: 3px; background: var(--border-strong); border-radius: 2px; outline: none; cursor: pointer; }
+  .staff-slider-inner input[type=range]::-webkit-slider-thumb { -webkit-appearance: none; width: 16px; height: 16px; border-radius: 50%; background: var(--text); cursor: pointer; border: 2px solid var(--bg); box-shadow: 0 0 0 1px var(--border-strong); }
+  .staff-slider-inner input[type=range]::-moz-range-thumb { width: 16px; height: 16px; border-radius: 50%; background: var(--text); cursor: pointer; border: 2px solid var(--bg); }
+  .staff-pct-out { font-size: 12px; font-family: 'DM Mono', monospace; color: var(--text-2); min-width: 38px; text-align: right; }
+ 
+  /* Retention */
+  .retention-row { display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
+  .retention-row .rr-label { font-size: 13px; color: var(--text-2); flex: 1; }
+  .toggle { position: relative; width: 36px; height: 20px; flex-shrink: 0; }
+  .toggle input { opacity: 0; width: 0; height: 0; position: absolute; }
+  .toggle-track { position: absolute; inset: 0; border-radius: 20px; background: #ccc; transition: background 0.2s; cursor: pointer; }
+  .toggle-track::after { content: ''; position: absolute; left: 3px; top: 3px; width: 14px; height: 14px; border-radius: 50%; background: white; transition: transform 0.2s; box-shadow: 0 1px 3px rgba(0,0,0,0.2); }
+  .toggle input:checked + .toggle-track { background: var(--green-mid); }
+  .toggle input:checked + .toggle-track::after { transform: translateX(16px); }
+ 
+  /* Ramp */
+  .ramp-banner { background: var(--green-light); border: 1px solid rgba(29,158,117,0.25); border-radius: 10px; padding: 1rem 1.25rem; display: flex; align-items: center; justify-content: space-between; gap: 1rem; }
+  .ramp-banner .rb-label { font-size: 13px; font-weight: 500; color: var(--green); }
+  .ramp-banner .rb-sub { font-size: 11px; color: #3d8f6a; margin-top: 2px; }
+  .ramp-banner .rb-value { font-size: 22px; font-weight: 600; font-family: 'DM Mono', monospace; color: var(--green); }
+ 
+  .divider { border: none; border-top: 1px solid var(--border); margin: 2rem 0; }
+ 
+  /* Totals */
+  .totals-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 10px; }
+  .total-card { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 1rem 1.25rem; }
+  .total-card.highlight { background: var(--text); border-color: var(--text); }
+  .total-card .tc-label { font-size: 11px; font-family: 'DM Mono', monospace; color: var(--text-3); margin-bottom: 6px; }
   .total-card.highlight .tc-label { color: rgba(255,255,255,0.45); }
-  .total-card .tc-value {
-    font-size: 22px;
-    font-weight: 500;
-    letter-spacing: -0.02em;
-    color: var(--text);
-  }
+  .total-card .tc-value { font-size: 22px; font-weight: 500; letter-spacing: -0.02em; color: var(--text); }
   .total-card.highlight .tc-value { color: #f5f4f0; }
-  .total-card .tc-sub {
-    font-size: 11px;
-    color: var(--text-3);
-    margin-top: 3px;
-  }
+  .total-card .tc-sub { font-size: 11px; color: var(--text-3); margin-top: 3px; }
   .total-card.highlight .tc-sub { color: rgba(255,255,255,0.35); }
-
-  footer {
-    text-align: center;
-    padding: 2rem;
-    font-size: 11px;
-    color: var(--text-3);
-    font-family: 'DM Mono', monospace;
-  }
-
+ 
+  /* Fine print */
+  .fine-print { margin-top: 2.5rem; background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 1.25rem 1.5rem; }
+  .fine-print h3 { font-size: 11px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; font-family: 'DM Mono', monospace; color: var(--text-3); margin-bottom: 10px; }
+  .fine-print ul { list-style: none; display: flex; flex-direction: column; gap: 7px; }
+  .fine-print li { font-size: 12px; color: var(--text-2); padding-left: 14px; position: relative; line-height: 1.5; }
+  .fine-print li::before { content: '—'; position: absolute; left: 0; color: var(--text-3); }
+ 
+  footer { text-align: center; padding: 2rem; font-size: 11px; color: var(--text-3); font-family: 'DM Mono', monospace; }
+ 
   @media (max-width: 500px) {
     .slider-row label { min-width: 90px; font-size: 11px; }
     .team-section { gap: 1.25rem; }
@@ -345,27 +138,27 @@
 </style>
 </head>
 <body>
-
+ 
 <header>
   <div class="eyebrow">Peak Behavioral Health</div>
   <h1>Director of OT — Compensation Model</h1>
   <p class="subtitle">Base salary + performance bonus + ramp incentive</p>
 </header>
-
+ 
 <div class="container">
-
-  <div class="section-label">Team size — each addition grows the bonus pool</div>
+ 
+  <div class="section-label">Additional staff — each addition grows the bonus pool &amp; reduces director's billing target</div>
   <div class="team-section">
     <div class="team-group">
-      <div class="tg-label">COTAs supervised <span class="tg-add">+$2,500 / pool</span></div>
+      <div class="tg-label">Additional COTAs<span class="tg-add"> +$2,500/pool · −2 hrs target</span></div>
       <div class="counter">
         <button onclick="adjustTeam('cota',-1)">−</button>
-        <span class="count" id="cota-count">1</span>
+        <span class="count" id="cota-count">0</span>
         <button onclick="adjustTeam('cota',1)">+</button>
       </div>
     </div>
     <div class="team-group">
-      <div class="tg-label">OTs supervised <span class="tg-add">+$5,000 / pool</span></div>
+      <div class="tg-label">OTs supervised<span class="tg-add"> +$5,000/pool · −2 hrs target</span></div>
       <div class="counter">
         <button onclick="adjustTeam('ot',-1)">−</button>
         <span class="count" id="ot-count">0</span>
@@ -374,68 +167,105 @@
     </div>
     <div class="pool-display">
       <div class="pool-label">max bonus pool</div>
-      <div class="pool-value" id="max-pool">$17,500</div>
-      <div class="pool-detail" id="pool-detail">base + 1 COTA</div>
+      <div class="pool-value" id="max-pool">$15,000</div>
+      <div class="pool-detail" id="pool-detail">Ryan included in base</div>
     </div>
   </div>
-
-  <div class="section-label">Performance — slide to model scenarios</div>
-
+ 
+  <div class="section-label">Director's billable hour expectation</div>
+  <div class="dir-expect">
+    <div class="de-label">Weekly target</div>
+    <div class="de-val" id="dir-expect-val">25 hrs</div>
+    <div class="de-sub" id="dir-expect-sub">27 base − 2 hrs (Ryan)</div>
+  </div>
+ 
+  <div class="section-label">Performance</div>
+ 
+  <!-- Director -->
   <div class="card">
-    <div class="card-title">COTA hitting 27-hr expectation <span class="weight">55% of pool</span></div>
+    <div class="card-header">
+      <div>
+        <div class="card-title">Director — hitting billable hour expectation</div>
+        <div class="card-weight" id="dir-weight-label">25% of pool</div>
+      </div>
+      <div class="card-earn" id="dir-earn">—</div>
+    </div>
     <div class="slider-row">
-      <label>% of expectation met</label>
-      <input type="range" min="0" max="100" value="100" step="1" id="cota-pct" oninput="calc()">
-      <span class="pct-label" id="cota-pct-out">100%</span>
-      <span class="earn-label" id="cota-earn">—</span>
+      <label>% of periods met</label>
+      <input type="range" min="0" max="100" value="100" step="1" id="dir-pct" oninput="calc()">
+      <span class="pct-label" id="dir-pct-out">100%</span>
     </div>
-    <div class="bar-track"><div class="bar-fill" id="cota-bar" style="width:100%"></div></div>
   </div>
-
+ 
+  <!-- COTAs -->
   <div class="card">
-    <div class="card-title">Director hitting 27-hr expectation <span class="weight">25% of pool</span></div>
-    <div class="slider-row">
-      <label>% of expectation met</label>
-      <input type="range" min="0" max="100" value="100" step="1" id="ot-pct" oninput="calc()">
-      <span class="pct-label" id="ot-pct-out">100%</span>
-      <span class="earn-label" id="ot-earn">—</span>
+    <div class="card-header">
+      <div>
+        <div class="card-title">COTAs — hitting 27-hr expectation</div>
+        <div class="card-weight" id="cota-weight-label">55% of pool, split equally per COTA</div>
+      </div>
+      <div class="card-earn" id="cota-earn-total">—</div>
     </div>
-    <div class="bar-track"><div class="bar-fill" id="ot-bar" style="width:100%"></div></div>
+    <div class="staff-list" id="cota-list"></div>
   </div>
-
-  <div class="card">
-    <div class="card-title">Staff satisfaction <span class="weight">10% of pool</span></div>
-    <div class="slider-row">
-      <label>Score achieved</label>
-      <input type="range" min="0" max="100" value="100" step="1" id="staff-pct" oninput="calc()">
-      <span class="pct-label" id="staff-pct-out">100%</span>
-      <span class="earn-label" id="staff-earn">—</span>
+ 
+  <!-- OTs supervised -->
+  <div class="card" id="ot-perf-card" style="display:none;">
+    <div class="card-header">
+      <div>
+        <div class="card-title">OTs supervised — hitting 27-hr expectation</div>
+        <div class="card-weight" id="ot-weight-label">OT pool share, split equally</div>
+      </div>
+      <div class="card-earn" id="ot-earn-total">—</div>
     </div>
-    <div class="bar-track"><div class="bar-fill" id="staff-bar" style="width:100%"></div></div>
+    <div class="staff-list" id="ot-list"></div>
   </div>
-
+ 
+  <!-- Staff retention -->
   <div class="card">
-    <div class="card-title">Client satisfaction <span class="weight">10% of pool</span></div>
+    <div class="card-header">
+      <div>
+        <div class="card-title">Staff retention</div>
+        <div class="card-weight">10% of pool — 100% retention for the quarter = full amount earned</div>
+      </div>
+      <div class="card-earn" id="retention-earn">—</div>
+    </div>
+    <div class="retention-row">
+      <span class="rr-label">100% staff retention this quarter?</span>
+      <label class="toggle">
+        <input type="checkbox" id="retention-toggle" checked onchange="calc()">
+        <span class="toggle-track"></span>
+      </label>
+    </div>
+  </div>
+ 
+  <!-- Client satisfaction -->
+  <div class="card">
+    <div class="card-header">
+      <div>
+        <div class="card-title">Client satisfaction</div>
+        <div class="card-weight">10% of pool</div>
+      </div>
+      <div class="card-earn" id="client-earn">—</div>
+    </div>
     <div class="slider-row">
       <label>Score achieved</label>
       <input type="range" min="0" max="100" value="100" step="1" id="client-pct" oninput="calc()">
       <span class="pct-label" id="client-pct-out">100%</span>
-      <span class="earn-label" id="client-earn">—</span>
     </div>
-    <div class="bar-track"><div class="bar-fill" id="client-bar" style="width:100%"></div></div>
   </div>
-
+ 
   <hr class="divider">
-
-  <div class="section-label">Ramp bonus — one time, when director meets expectations</div>
+ 
+  <div class="section-label">Ramp bonus — one time, when director first meets expectations</div>
   <div class="ramp-banner">
     <div>
       <div class="rb-label">Director ramp bonus</div>
-      <div class="rb-sub">Earned once upon hitting 27-hr expectation</div>
+      <div class="rb-sub">One-time payment upon first hitting billable hour expectation</div>
     </div>
     <div class="rb-value">$2,500</div>
   </div>
-
+ 
   <div class="section-label">Total compensation</div>
   <div class="totals-grid">
     <div class="total-card">
@@ -445,7 +275,7 @@
     <div class="total-card">
       <div class="tc-label">performance bonus</div>
       <div class="tc-value" id="perf-total">—</div>
-      <div class="tc-sub" id="perf-pct">of $17,500 pool</div>
+      <div class="tc-sub" id="perf-pct">—</div>
     </div>
     <div class="total-card">
       <div class="tc-label">ramp bonus</div>
@@ -458,84 +288,223 @@
       <div class="tc-sub" id="grand-sub">—</div>
     </div>
   </div>
-
+ 
+  <div class="fine-print">
+    <h3>Notes &amp; Fine Print</h3>
+    <ul>
+      <li>Director's billable hour expectation starts at 27 hrs/week and decreases by 2 hrs for each COTA supervised and 5 hrs for each OT supervised, reflecting increased administrative and supervisory responsibility.</li>
+      <li>Ryan is included in the base $15,000 bonus pool. Each additional COTA adds $2,500 to the pool; each additional OT adds $5,000.</li>
+      <li>COTA performance bonus (55% of pool) is divided equally among all COTAs. The director earns each COTA's proportional share scaled by the percentage of evaluation periods that COTA hit their goal. Example: if Ryan hits his goal 60% of periods, the director earns 60% of Ryan's share.</li>
+      <li>OT performance bonus is divided equally among supervised OTs and earned proportionally the same way.</li>
+      <li>Staff retention bonus (10% of pool) is all-or-nothing: 100% retention for the quarter earns the full amount. Any turnover forfeits this component entirely.</li>
+      <li>Paid time off, paid holidays, and full office closures do not count against any provider's or the director's billable hour expectations. Hours are measured against available working time only.</li>
+      <li>Ramp bonus of $2,500 is a one-time payment earned when the director first meets her billable hour expectation. It does not recur annually.</li>
+      <li>All bonus components are evaluated and paid on a schedule determined by Peak Behavioral Health leadership.</li>
+    </ul>
+  </div>
+ 
 </div>
-
+ 
 <footer>Peak Behavioral Health &mdash; internal use only</footer>
-
+ 
 <script>
-const BASE = 90000;
-const BASE_POOL = 15000;
-const COTA_POOL_ADD = 2500;
-const OT_POOL_ADD = 5000;
-const RAMP = 2500;
-
-let cotas = 1;
-let ots = 0;
-
-function fmt(n) {
-  return '$' + Math.round(n).toLocaleString('en-US');
-}
-
-function adjustTeam(type, delta) {
-  if (type === 'cota') {
-    const next = cotas + delta;
-    if (next < 0) return;
-    cotas = next;
-    document.getElementById('cota-count').textContent = cotas;
-  } else {
-    const next = ots + delta;
-    if (next < 0) return;
-    ots = next;
-    document.getElementById('ot-count').textContent = ots;
+  const BASE = 90000;
+  const BASE_POOL = 15000;
+  const COTA_POOL_ADD = 2500;
+  const OT_POOL_ADD = 5000;
+  const RAMP = 2500;
+  const BASE_DIR_HRS = 27;
+ 
+  // Ryan is always index 0, additional COTAs follow
+  let cotaPcts = [100]; // Ryan starts at 100%
+  let otPcts = [];
+  let addlCotas = 0;
+  let ots = 0;
+ 
+  function fmt(n) { return '$' + Math.round(n).toLocaleString('en-US'); }
+ 
+  function totalCOTAs() { return 1 + addlCotas; } // Ryan + additional
+ 
+  function adjustTeam(type, delta) {
+    if (type === 'cota') {
+      const next = addlCotas + delta;
+      if (next < 0) return;
+      if (delta > 0) cotaPcts.push(100);
+      else cotaPcts.pop();
+      addlCotas = next;
+      document.getElementById('cota-count').textContent = addlCotas;
+    } else {
+      const next = ots + delta;
+      if (next < 0) return;
+      if (delta > 0) otPcts.push(100);
+      else otPcts.pop();
+      ots = next;
+      document.getElementById('ot-count').textContent = ots;
+    }
+    renderStaffLists();
+    calc();
   }
+ 
+  function colorClass(pct) {
+    if (pct >= 80) return 'high';
+    if (pct >= 50) return 'mid';
+    return 'low';
+  }
+ 
+  function renderStaffLists() {
+    const pool = BASE_POOL + (addlCotas * COTA_POOL_ADD) + (ots * OT_POOL_ADD);
+    const numCotas = totalCOTAs();
+    const perCota = numCotas > 0 ? (pool * 0.55) / numCotas : 0;
+ 
+    // COTA list
+    const cotaList = document.getElementById('cota-list');
+    cotaList.innerHTML = '';
+    for (let i = 0; i < numCotas; i++) {
+      const pct = cotaPcts[i];
+      const earn = perCota * (pct / 100);
+      const isRyan = i === 0;
+      const name = isRyan ? 'Ryan' : 'COTA ' + (i + 1);
+      const cls = colorClass(pct);
+      const div = document.createElement('div');
+      div.className = 'staff-slider-row ' + cls;
+      div.innerHTML = `
+        <div class="staff-slider-top">
+          <span class="staff-slider-name">${name}${isRyan ? '<span class="staff-base-badge">base team</span>' : ''}</span>
+          <span class="staff-slider-meta">${fmt(perCota)} share</span>
+          <span class="staff-slider-earn" id="cota-earn-${i}">${fmt(earn)}</span>
+        </div>
+        <div class="staff-slider-inner">
+          <input type="range" min="0" max="100" value="${pct}" step="1"
+            oninput="updateStaff('cota',${i},this.value)">
+          <span class="staff-pct-out" id="cota-pct-${i}">${pct}%</span>
+        </div>
+      `;
+      cotaList.appendChild(div);
+    }
+ 
+    // OT list
+    const otCard = document.getElementById('ot-perf-card');
+    otCard.style.display = ots > 0 ? 'block' : 'none';
+    const otList = document.getElementById('ot-list');
+    otList.innerHTML = '';
+    const otPoolPortion = ots * OT_POOL_ADD;
+    const perOt = ots > 0 ? otPoolPortion / ots : 0;
+    for (let i = 0; i < ots; i++) {
+      const pct = otPcts[i];
+      const earn = perOt * (pct / 100);
+      const cls = colorClass(pct);
+      const div = document.createElement('div');
+      div.className = 'staff-slider-row ' + cls;
+      div.innerHTML = `
+        <div class="staff-slider-top">
+          <span class="staff-slider-name">OT ${i + 1}</span>
+          <span class="staff-slider-meta">${fmt(perOt)} share</span>
+          <span class="staff-slider-earn" id="ot-earn-${i}">${fmt(earn)}</span>
+        </div>
+        <div class="staff-slider-inner">
+          <input type="range" min="0" max="100" value="${pct}" step="1"
+            oninput="updateStaff('ot',${i},this.value)">
+          <span class="staff-pct-out" id="ot-pct-${i}">${pct}%</span>
+        </div>
+      `;
+      otList.appendChild(div);
+    }
+  }
+ 
+  function updateStaff(type, index, val) {
+    val = parseInt(val);
+    if (type === 'cota') cotaPcts[index] = val;
+    else otPcts[index] = val;
+    // Update color class and labels without full re-render
+    const list = type === 'cota' ? document.getElementById('cota-list') : document.getElementById('ot-list');
+    const rows = list.querySelectorAll('.staff-slider-row');
+    if (rows[index]) {
+      rows[index].className = 'staff-slider-row ' + colorClass(val);
+    }
+    const pctEl = document.getElementById(type + '-pct-' + index);
+    if (pctEl) pctEl.textContent = val + '%';
+    calc();
+  }
+ 
+  function calc() {
+    const dirPct = parseInt(document.getElementById('dir-pct').value) / 100;
+    const clientPct = parseInt(document.getElementById('client-pct').value) / 100;
+    const retentionMet = document.getElementById('retention-toggle').checked;
+ 
+    document.getElementById('dir-pct-out').textContent = Math.round(dirPct * 100) + '%';
+    document.getElementById('client-pct-out').textContent = Math.round(clientPct * 100) + '%';
+ 
+    // Director target
+    const dirHrs = Math.max(0, BASE_DIR_HRS - (totalCOTAs() * 2) - (ots * 2));
+    document.getElementById('dir-expect-val').textContent = dirHrs + ' hrs';
+    const reductions = [];
+    reductions.push(totalCOTAs() + ' COTA' + (totalCOTAs() !== 1 ? 's' : '') + ' (−' + (totalCOTAs() * 2) + ' hrs)');
+    if (ots > 0) reductions.push(ots + ' OT' + (ots !== 1 ? 's' : '') + ' (−' + (ots * 2) + ' hrs)');
+    document.getElementById('dir-expect-sub').textContent = '27 base − ' + reductions.join(', ');
+ 
+    // Pool
+    const pool = BASE_POOL + (addlCotas * COTA_POOL_ADD) + (ots * OT_POOL_ADD);
+    document.getElementById('max-pool').textContent = fmt(pool);
+    const parts = ['Ryan'];
+    if (addlCotas > 0) parts.push(addlCotas + ' addl COTA' + (addlCotas !== 1 ? 's' : ''));
+    if (ots > 0) parts.push(ots + ' OT' + (ots !== 1 ? 's' : ''));
+    document.getElementById('pool-detail').textContent = parts.join(' + ');
+ 
+    // Director: 25% * slider
+    const dirEarn = pool * 0.25 * dirPct;
+    document.getElementById('dir-earn').textContent = fmt(dirEarn);
+    document.getElementById('dir-weight-label').textContent =
+      '25% of pool = ' + fmt(pool * 0.25) + ' at full performance';
+ 
+    // COTAs: 55% split, each scaled by their slider
+    const numCotas = totalCOTAs();
+    const perCota = numCotas > 0 ? (pool * 0.55) / numCotas : 0;
+    let cotaEarnTotal = 0;
+    for (let i = 0; i < numCotas; i++) {
+      const earn = perCota * (cotaPcts[i] / 100);
+      cotaEarnTotal += earn;
+      const el = document.getElementById('cota-earn-' + i);
+      if (el) el.textContent = fmt(earn);
+    }
+    document.getElementById('cota-earn-total').textContent = fmt(cotaEarnTotal);
+    document.getElementById('cota-weight-label').textContent =
+      '55% of pool = ' + fmt(pool * 0.55) + ' · ' + fmt(perCota) + ' per COTA';
+ 
+    // OTs: OT pool portion split, each scaled by their slider
+    let otEarnTotal = 0;
+    if (ots > 0) {
+      const otPoolPortion = ots * OT_POOL_ADD;
+      const perOt = otPoolPortion / ots;
+      for (let i = 0; i < ots; i++) {
+        const earn = perOt * (otPcts[i] / 100);
+        otEarnTotal += earn;
+        const el = document.getElementById('ot-earn-' + i);
+        if (el) el.textContent = fmt(earn);
+      }
+      document.getElementById('ot-weight-label').textContent =
+        fmt(ots * OT_POOL_ADD) + ' OT pool · ' + fmt(ots * OT_POOL_ADD / ots) + ' per OT';
+      document.getElementById('ot-earn-total').textContent = fmt(otEarnTotal);
+    }
+ 
+    // Retention
+    const retentionEarn = retentionMet ? pool * 0.10 : 0;
+    document.getElementById('retention-earn').textContent = fmt(retentionEarn);
+ 
+    // Client
+    const clientEarn = pool * 0.10 * clientPct;
+    document.getElementById('client-earn').textContent = fmt(clientEarn);
+ 
+    const perfTotal = dirEarn + cotaEarnTotal + otEarnTotal + retentionEarn + clientEarn;
+    document.getElementById('perf-total').textContent = fmt(perfTotal);
+    document.getElementById('perf-pct').textContent = 'of ' + fmt(pool) + ' pool';
+ 
+    const grand = BASE + perfTotal + RAMP;
+    document.getElementById('grand-total').textContent = fmt(grand);
+    document.getElementById('grand-sub').textContent = fmt(grand - BASE) + ' above base';
+  }
+ 
+  renderStaffLists();
   calc();
-}
-
-function calc() {
-  const cotaPct = parseInt(document.getElementById('cota-pct').value) / 100;
-  const otPct = parseInt(document.getElementById('ot-pct').value) / 100;
-  const staffPct = parseInt(document.getElementById('staff-pct').value) / 100;
-  const clientPct = parseInt(document.getElementById('client-pct').value) / 100;
-
-  document.getElementById('cota-pct-out').textContent = Math.round(cotaPct * 100) + '%';
-  document.getElementById('ot-pct-out').textContent = Math.round(otPct * 100) + '%';
-  document.getElementById('staff-pct-out').textContent = Math.round(staffPct * 100) + '%';
-  document.getElementById('client-pct-out').textContent = Math.round(clientPct * 100) + '%';
-
-  const pool = BASE_POOL + (cotas * COTA_POOL_ADD) + (ots * OT_POOL_ADD);
-  document.getElementById('max-pool').textContent = fmt(pool);
-
-  const parts = [];
-  if (cotas > 0) parts.push(cotas + ' COTA' + (cotas !== 1 ? 's' : ''));
-  if (ots > 0) parts.push(ots + ' OT' + (ots !== 1 ? 's' : ''));
-  document.getElementById('pool-detail').textContent = parts.length ? 'base + ' + parts.join(' + ') : 'base only';
-
-  const cotaEarn = pool * 0.55 * cotaPct;
-  const otEarn = pool * 0.25 * otPct;
-  const staffEarn = pool * 0.10 * staffPct;
-  const clientEarn = pool * 0.10 * clientPct;
-  const perfTotal = cotaEarn + otEarn + staffEarn + clientEarn;
-
-  document.getElementById('cota-earn').textContent = fmt(cotaEarn);
-  document.getElementById('ot-earn').textContent = fmt(otEarn);
-  document.getElementById('staff-earn').textContent = fmt(staffEarn);
-  document.getElementById('client-earn').textContent = fmt(clientEarn);
-
-  document.getElementById('cota-bar').style.width = Math.round(cotaPct * 100) + '%';
-  document.getElementById('ot-bar').style.width = Math.round(otPct * 100) + '%';
-  document.getElementById('staff-bar').style.width = Math.round(staffPct * 100) + '%';
-  document.getElementById('client-bar').style.width = Math.round(clientPct * 100) + '%';
-
-  document.getElementById('perf-total').textContent = fmt(perfTotal);
-  document.getElementById('perf-pct').textContent = 'of ' + fmt(pool) + ' pool';
-
-  const grand = BASE + perfTotal + RAMP;
-  document.getElementById('grand-total').textContent = fmt(grand);
-  document.getElementById('grand-sub').textContent = fmt(grand - BASE) + ' above base';
-}
-
-calc();
 </script>
 </body>
 </html>
