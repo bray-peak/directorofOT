@@ -1,0 +1,541 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Director of OT — Compensation Model</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #f5f4f0;
+    --surface: #ffffff;
+    --surface-2: #eeecea;
+    --border: rgba(0,0,0,0.1);
+    --border-strong: rgba(0,0,0,0.18);
+    --text: #1a1917;
+    --text-2: #6b6860;
+    --text-3: #9e9b94;
+    --green: #1a6b4a;
+    --green-light: #e6f4ed;
+    --green-mid: #2d9e6e;
+    --amber: #92580a;
+    --amber-light: #fdf3e3;
+    --red: #a33030;
+    --red-light: #fceaea;
+    --accent: #2a5caa;
+    --accent-light: #e8eef8;
+  }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+    padding: 0;
+  }
+
+  header {
+    background: var(--text);
+    color: #f5f4f0;
+    padding: 2.5rem 2rem 2rem;
+    position: relative;
+    overflow: hidden;
+  }
+  header::after {
+    content: 'OT';
+    position: absolute;
+    right: -0.5rem;
+    top: -1rem;
+    font-size: 9rem;
+    font-weight: 600;
+    color: rgba(255,255,255,0.04);
+    line-height: 1;
+    pointer-events: none;
+    letter-spacing: -4px;
+  }
+  header .eyebrow {
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.4);
+    margin-bottom: 8px;
+    font-family: 'DM Mono', monospace;
+  }
+  header h1 {
+    font-size: clamp(1.4rem, 3vw, 2rem);
+    font-weight: 500;
+    letter-spacing: -0.02em;
+    color: #f5f4f0;
+    line-height: 1.2;
+  }
+  header .subtitle {
+    margin-top: 6px;
+    font-size: 13px;
+    color: rgba(255,255,255,0.45);
+  }
+
+  .container {
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 2rem 1.25rem 4rem;
+  }
+
+  .section-label {
+    font-size: 10.5px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--text-3);
+    font-family: 'DM Mono', monospace;
+    margin-bottom: 12px;
+    margin-top: 2.5rem;
+  }
+
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 1.25rem 1.5rem;
+    margin-bottom: 10px;
+  }
+
+  .card-title {
+    font-size: 13.5px;
+    font-weight: 500;
+    color: var(--text);
+    margin-bottom: 14px;
+    display: flex;
+    align-items: baseline;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+  .card-title .weight {
+    font-size: 11px;
+    font-family: 'DM Mono', monospace;
+    color: var(--text-3);
+    font-weight: 400;
+  }
+
+  .slider-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 12px;
+  }
+  .slider-row label {
+    font-size: 12px;
+    color: var(--text-2);
+    flex: 0 0 auto;
+    min-width: 130px;
+  }
+  .slider-row input[type=range] {
+    flex: 1;
+    -webkit-appearance: none;
+    height: 3px;
+    background: var(--border-strong);
+    border-radius: 2px;
+    outline: none;
+    cursor: pointer;
+  }
+  input[type=range]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background: var(--text);
+    cursor: pointer;
+    border: 2px solid var(--bg);
+    box-shadow: 0 0 0 1px var(--border-strong);
+  }
+  input[type=range]::-moz-range-thumb {
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background: var(--text);
+    cursor: pointer;
+    border: 2px solid var(--bg);
+  }
+  .pct-label {
+    font-size: 12px;
+    font-family: 'DM Mono', monospace;
+    color: var(--text-2);
+    min-width: 38px;
+    text-align: right;
+  }
+  .earn-label {
+    font-size: 13px;
+    font-weight: 500;
+    font-family: 'DM Mono', monospace;
+    color: var(--text);
+    min-width: 72px;
+    text-align: right;
+  }
+
+  .bar-track {
+    height: 4px;
+    background: var(--surface-2);
+    border-radius: 2px;
+    overflow: hidden;
+  }
+  .bar-fill {
+    height: 100%;
+    border-radius: 2px;
+    background: var(--green-mid);
+    transition: width 0.15s ease;
+  }
+
+  .team-section {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 1.25rem 1.5rem;
+    display: flex;
+    align-items: flex-start;
+    gap: 2rem;
+    flex-wrap: wrap;
+  }
+  .team-group { flex: 0 0 auto; }
+  .team-group .tg-label {
+    font-size: 11px;
+    color: var(--text-3);
+    margin-bottom: 8px;
+    font-family: 'DM Mono', monospace;
+  }
+  .team-group .tg-add {
+    font-size: 10px;
+    color: var(--accent);
+    margin-left: 4px;
+  }
+  .counter {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .counter button {
+    width: 30px;
+    height: 30px;
+    border-radius: 6px;
+    border: 1px solid var(--border-strong);
+    background: transparent;
+    cursor: pointer;
+    font-size: 16px;
+    color: var(--text);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.1s;
+    line-height: 1;
+  }
+  .counter button:hover { background: var(--surface-2); }
+  .counter .count {
+    font-size: 20px;
+    font-weight: 500;
+    font-family: 'DM Mono', monospace;
+    min-width: 24px;
+    text-align: center;
+  }
+
+  .pool-display {
+    margin-left: auto;
+    text-align: right;
+  }
+  .pool-display .pool-label {
+    font-size: 11px;
+    color: var(--text-3);
+    font-family: 'DM Mono', monospace;
+    margin-bottom: 4px;
+  }
+  .pool-display .pool-value {
+    font-size: 24px;
+    font-weight: 500;
+    letter-spacing: -0.02em;
+    color: var(--text);
+  }
+  .pool-display .pool-detail {
+    font-size: 11px;
+    color: var(--text-3);
+    margin-top: 2px;
+  }
+
+  .divider {
+    border: none;
+    border-top: 1px solid var(--border);
+    margin: 2rem 0;
+  }
+
+  .ramp-banner {
+    background: var(--green-light);
+    border: 1px solid rgba(29,158,117,0.25);
+    border-radius: 10px;
+    padding: 1rem 1.25rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+  }
+  .ramp-banner .rb-label {
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--green);
+  }
+  .ramp-banner .rb-sub {
+    font-size: 11px;
+    color: #3d8f6a;
+    margin-top: 2px;
+  }
+  .ramp-banner .rb-value {
+    font-size: 22px;
+    font-weight: 600;
+    font-family: 'DM Mono', monospace;
+    color: var(--green);
+  }
+
+  .totals-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 10px;
+  }
+  .total-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 1rem 1.25rem;
+  }
+  .total-card.highlight {
+    background: var(--text);
+    border-color: var(--text);
+  }
+  .total-card .tc-label {
+    font-size: 11px;
+    font-family: 'DM Mono', monospace;
+    color: var(--text-3);
+    margin-bottom: 6px;
+  }
+  .total-card.highlight .tc-label { color: rgba(255,255,255,0.45); }
+  .total-card .tc-value {
+    font-size: 22px;
+    font-weight: 500;
+    letter-spacing: -0.02em;
+    color: var(--text);
+  }
+  .total-card.highlight .tc-value { color: #f5f4f0; }
+  .total-card .tc-sub {
+    font-size: 11px;
+    color: var(--text-3);
+    margin-top: 3px;
+  }
+  .total-card.highlight .tc-sub { color: rgba(255,255,255,0.35); }
+
+  footer {
+    text-align: center;
+    padding: 2rem;
+    font-size: 11px;
+    color: var(--text-3);
+    font-family: 'DM Mono', monospace;
+  }
+
+  @media (max-width: 500px) {
+    .slider-row label { min-width: 90px; font-size: 11px; }
+    .team-section { gap: 1.25rem; }
+    .pool-display { margin-left: 0; text-align: left; width: 100%; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="eyebrow">Peak Behavioral Health</div>
+  <h1>Director of OT — Compensation Model</h1>
+  <p class="subtitle">Base salary + performance bonus + ramp incentive</p>
+</header>
+
+<div class="container">
+
+  <div class="section-label">Team size — each addition grows the bonus pool</div>
+  <div class="team-section">
+    <div class="team-group">
+      <div class="tg-label">COTAs supervised <span class="tg-add">+$2,500 / pool</span></div>
+      <div class="counter">
+        <button onclick="adjustTeam('cota',-1)">−</button>
+        <span class="count" id="cota-count">1</span>
+        <button onclick="adjustTeam('cota',1)">+</button>
+      </div>
+    </div>
+    <div class="team-group">
+      <div class="tg-label">OTs supervised <span class="tg-add">+$5,000 / pool</span></div>
+      <div class="counter">
+        <button onclick="adjustTeam('ot',-1)">−</button>
+        <span class="count" id="ot-count">0</span>
+        <button onclick="adjustTeam('ot',1)">+</button>
+      </div>
+    </div>
+    <div class="pool-display">
+      <div class="pool-label">max bonus pool</div>
+      <div class="pool-value" id="max-pool">$17,500</div>
+      <div class="pool-detail" id="pool-detail">base + 1 COTA</div>
+    </div>
+  </div>
+
+  <div class="section-label">Performance — slide to model scenarios</div>
+
+  <div class="card">
+    <div class="card-title">COTA hitting 27-hr expectation <span class="weight">55% of pool</span></div>
+    <div class="slider-row">
+      <label>% of expectation met</label>
+      <input type="range" min="0" max="100" value="100" step="1" id="cota-pct" oninput="calc()">
+      <span class="pct-label" id="cota-pct-out">100%</span>
+      <span class="earn-label" id="cota-earn">—</span>
+    </div>
+    <div class="bar-track"><div class="bar-fill" id="cota-bar" style="width:100%"></div></div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">Director hitting 27-hr expectation <span class="weight">25% of pool</span></div>
+    <div class="slider-row">
+      <label>% of expectation met</label>
+      <input type="range" min="0" max="100" value="100" step="1" id="ot-pct" oninput="calc()">
+      <span class="pct-label" id="ot-pct-out">100%</span>
+      <span class="earn-label" id="ot-earn">—</span>
+    </div>
+    <div class="bar-track"><div class="bar-fill" id="ot-bar" style="width:100%"></div></div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">Staff satisfaction <span class="weight">10% of pool</span></div>
+    <div class="slider-row">
+      <label>Score achieved</label>
+      <input type="range" min="0" max="100" value="100" step="1" id="staff-pct" oninput="calc()">
+      <span class="pct-label" id="staff-pct-out">100%</span>
+      <span class="earn-label" id="staff-earn">—</span>
+    </div>
+    <div class="bar-track"><div class="bar-fill" id="staff-bar" style="width:100%"></div></div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">Client satisfaction <span class="weight">10% of pool</span></div>
+    <div class="slider-row">
+      <label>Score achieved</label>
+      <input type="range" min="0" max="100" value="100" step="1" id="client-pct" oninput="calc()">
+      <span class="pct-label" id="client-pct-out">100%</span>
+      <span class="earn-label" id="client-earn">—</span>
+    </div>
+    <div class="bar-track"><div class="bar-fill" id="client-bar" style="width:100%"></div></div>
+  </div>
+
+  <hr class="divider">
+
+  <div class="section-label">Ramp bonus — one time, when director meets expectations</div>
+  <div class="ramp-banner">
+    <div>
+      <div class="rb-label">Director ramp bonus</div>
+      <div class="rb-sub">Earned once upon hitting 27-hr expectation</div>
+    </div>
+    <div class="rb-value">$2,500</div>
+  </div>
+
+  <div class="section-label">Total compensation</div>
+  <div class="totals-grid">
+    <div class="total-card">
+      <div class="tc-label">base salary</div>
+      <div class="tc-value">$90,000</div>
+    </div>
+    <div class="total-card">
+      <div class="tc-label">performance bonus</div>
+      <div class="tc-value" id="perf-total">—</div>
+      <div class="tc-sub" id="perf-pct">of $17,500 pool</div>
+    </div>
+    <div class="total-card">
+      <div class="tc-label">ramp bonus</div>
+      <div class="tc-value">$2,500</div>
+      <div class="tc-sub">one time</div>
+    </div>
+    <div class="total-card highlight">
+      <div class="tc-label">total comp</div>
+      <div class="tc-value" id="grand-total">—</div>
+      <div class="tc-sub" id="grand-sub">—</div>
+    </div>
+  </div>
+
+</div>
+
+<footer>Peak Behavioral Health &mdash; internal use only</footer>
+
+<script>
+const BASE = 90000;
+const BASE_POOL = 15000;
+const COTA_POOL_ADD = 2500;
+const OT_POOL_ADD = 5000;
+const RAMP = 2500;
+
+let cotas = 1;
+let ots = 0;
+
+function fmt(n) {
+  return '$' + Math.round(n).toLocaleString('en-US');
+}
+
+function adjustTeam(type, delta) {
+  if (type === 'cota') {
+    const next = cotas + delta;
+    if (next < 0) return;
+    cotas = next;
+    document.getElementById('cota-count').textContent = cotas;
+  } else {
+    const next = ots + delta;
+    if (next < 0) return;
+    ots = next;
+    document.getElementById('ot-count').textContent = ots;
+  }
+  calc();
+}
+
+function calc() {
+  const cotaPct = parseInt(document.getElementById('cota-pct').value) / 100;
+  const otPct = parseInt(document.getElementById('ot-pct').value) / 100;
+  const staffPct = parseInt(document.getElementById('staff-pct').value) / 100;
+  const clientPct = parseInt(document.getElementById('client-pct').value) / 100;
+
+  document.getElementById('cota-pct-out').textContent = Math.round(cotaPct * 100) + '%';
+  document.getElementById('ot-pct-out').textContent = Math.round(otPct * 100) + '%';
+  document.getElementById('staff-pct-out').textContent = Math.round(staffPct * 100) + '%';
+  document.getElementById('client-pct-out').textContent = Math.round(clientPct * 100) + '%';
+
+  const pool = BASE_POOL + (cotas * COTA_POOL_ADD) + (ots * OT_POOL_ADD);
+  document.getElementById('max-pool').textContent = fmt(pool);
+
+  const parts = [];
+  if (cotas > 0) parts.push(cotas + ' COTA' + (cotas !== 1 ? 's' : ''));
+  if (ots > 0) parts.push(ots + ' OT' + (ots !== 1 ? 's' : ''));
+  document.getElementById('pool-detail').textContent = parts.length ? 'base + ' + parts.join(' + ') : 'base only';
+
+  const cotaEarn = pool * 0.55 * cotaPct;
+  const otEarn = pool * 0.25 * otPct;
+  const staffEarn = pool * 0.10 * staffPct;
+  const clientEarn = pool * 0.10 * clientPct;
+  const perfTotal = cotaEarn + otEarn + staffEarn + clientEarn;
+
+  document.getElementById('cota-earn').textContent = fmt(cotaEarn);
+  document.getElementById('ot-earn').textContent = fmt(otEarn);
+  document.getElementById('staff-earn').textContent = fmt(staffEarn);
+  document.getElementById('client-earn').textContent = fmt(clientEarn);
+
+  document.getElementById('cota-bar').style.width = Math.round(cotaPct * 100) + '%';
+  document.getElementById('ot-bar').style.width = Math.round(otPct * 100) + '%';
+  document.getElementById('staff-bar').style.width = Math.round(staffPct * 100) + '%';
+  document.getElementById('client-bar').style.width = Math.round(clientPct * 100) + '%';
+
+  document.getElementById('perf-total').textContent = fmt(perfTotal);
+  document.getElementById('perf-pct').textContent = 'of ' + fmt(pool) + ' pool';
+
+  const grand = BASE + perfTotal + RAMP;
+  document.getElementById('grand-total').textContent = fmt(grand);
+  document.getElementById('grand-sub').textContent = fmt(grand - BASE) + ' above base';
+}
+
+calc();
+</script>
+</body>
+</html>
